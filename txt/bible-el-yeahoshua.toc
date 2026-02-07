@@ -1,0 +1,66 @@
+genesis	στην αρχη
+exodus	τα ονοματα
+leviticus	και καλεσε
+numbers	στην ερημο
+deuteronomy	τα λογια
+joshua	ιηhοσυα του ναυη
+judges	κριτεσ
+1_samuel	σαμουαλ α’
+2_samuel	σαμουαλ β’
+1_kings	βασιλεων α’
+2_kings	βασιλεων β’
+isaiah	ισυαιηhο
+jeremiah	ιερεμιηhο
+ezekiel	ιεζεκιαλ
+hosea	ωσηε
+joel	ιωηλ
+amos	αμωσ
+obadiah	αβδιου
+jonah	ιωνασ
+micah	μιχαιασ
+nahum	ναουμ
+habakkuk	αββακουμ
+zephaniah	σοφονιασ
+haggai	αγγαιοσ
+zechariah	ζαχαριασ
+malachi	μαλαχιασ
+psalms	επαινουσ
+proverbs	παροιμιεσ
+job	ιωβ
+songs	ασμα ασματων
+ruth	ρουθ
+lamentations	πωσ
+ecclesiastes	εκκλησιαστησ
+esther	εσθηρ
+daniel	δανιαλ
+ezra	εσδρασ
+nehemiah	νεεμιασ
+1_chronicles	λογια των ημερων α’
+2_chronicles	λογια των ημερων β’
+romans	προσ ῥωμαιουσσ
+1_corinthians	κορινθιουσ α’
+2_corinthians	κορινθιουσ β’
+galatians	γαλατασ
+ephesians	εφεσιουσ
+philippians	φιλιππησιουσ
+colossians	κολοσσαεισ
+1_thessalonians	θεσσαλονικεισ α’
+2_thessalonians	θεσσαλονικεισ β’
+1_timothy	τιμοθεον α’
+2_timothy	τιμοθεον β’
+titus	τιτον
+philemon	φιλημονα
+hebrews	ἑβραιουσ επιστολη
+james	ιακωβου επιστολη
+1_peter	πετρου επιστολη α’
+2_peter	πετρου επιστολη β’
+1_john	ιωαννου επιστολη α’
+2_john	ιωαννου επιστολη β’
+3_john	ιωαννου επιστολη γ’
+jude	ιουδα επιστολη
+matthew	ιηhοσυα κατα μαθθαιον
+mark	ιηhοσυα κατα μαρκον
+luke	ιηhοσυα κατα λουκαν
+acts	πραξεισ αποστολων
+john	ιηhοσυα κατα ιωαννην
+revelation	αποκαλυψισ

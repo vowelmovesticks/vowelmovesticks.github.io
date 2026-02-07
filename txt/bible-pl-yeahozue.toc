@@ -1,0 +1,66 @@
+genesis	na początku
+exodus	imiona
+leviticus	i wezwał
+numbers	na puszczy
+deuteronomy	słowa
+joshua	yeahozuego
+judges	sędziów
+1_samuel	1. samuelowa
+2_samuel	2. samuelowa
+1_kings	1. królewska
+2_kings	2. królewska
+isaiah	izueyeaho
+jeremiah	jeremiyeaho
+ezekiel	ezechyjal
+hosea	hozeasza
+joel	joal
+amos	amos
+obadiah	abdiyeah
+jonah	jonasz
+micah	micheasz
+nahum	nahum
+habakkuk	habaquq
+zephaniah	sofoniyeah
+haggai	haggieusz
+zechariah	zachariyeah
+malachi	malachyjasz
+psalms	psalmów
+proverbs	przypowieści salomonowych
+job	ijobowa		
+songs	pieśń salomona	
+ruth	ruty
+lamentations	ach
+ecclesiastes	kaznodziei salomona	
+esther	estery
+daniel	danijal
+ezra	ezdraszowa	
+nehemiah	nehemiyeahowa
+1_chronicles	1. słowa dni
+2_chronicles	2. słowa dni
+romans	rzymian
+1_corinthians	1. koryntów
+2_corinthians	2. koryntów
+galatians	galatów
+ephesians	efezów
+philippians	filipensów
+colossians	kolosensów
+1_thessalonians	1. tesalonicensów
+2_thessalonians	2. tesalonicensów
+1_timothy	1. tymoteusza
+2_timothy	2. tymoteusza
+titus	tytusa
+philemon	filemona
+hebrews	żydów
+james	jaqóba
+1_peter	1. piotra
+2_peter	2. piotra
+1_john	1. yeahoana
+2_john	2. yeahoana
+3_john	3. yeahoana
+jude	judasa
+matthew	mateusza
+mark	marka
+luke	łukasza
+acts	dzieje apostolskie
+john	yeahoana
+revelation	objawienie yeahoana

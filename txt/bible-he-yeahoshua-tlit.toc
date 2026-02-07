@@ -1,0 +1,66 @@
+genesis	braSit
+exodus	Smot
+leviticus	oiqra
+numbers	bmdbr
+deuteronomy	dbrim
+joshua	ihoSe
+judges	SpTim
+1_samuel	Smoal a
+2_samuel	Smoal b
+1_kings	mlkim a
+2_kings	mlkim b
+isaiah	iSeiho
+jeremiah	irmiho
+ezekiel	iHcqal
+hosea	hoSe
+joel	ioal
+amos	emos
+obadiah	ebdih
+jonah	ionh
+micah	mikh
+nahum	nHom
+habakkuk	Hbqoq
+zephaniah	zpnih
+haggai	Hgi
+zechariah	ckrih
+malachi	mlaki
+psalms	thlim
+proverbs	mSli
+job	aiob
+songs	Sir hSirim
+ruth	rot
+lamentations	aikh
+ecclesiastes	qhlt
+esther	astr
+daniel	dnial
+ezra	ecra
+nehemiah	nHmih
+1_chronicles	dbri himim a
+2_chronicles	dbri himim b
+romans	al-hromiim
+1_corinthians	hraSonh al-hqorintim
+2_corinthians	hSniih al-hqorintim
+galatians	al-hglTim
+ephesians	al-hapsiim
+philippians	al-hpilipiim
+colossians	al-hqolomim
+1_thessalonians	hraSonh al-htsloniqim
+2_thessalonians	hSniih al-htsloniqim
+1_timothy	hraSonh al-Timotiom
+2_timothy	hSniih al-Timotiom
+titus	al-TiTom
+philemon	al-pilimon
+hebrews	al-hebrim
+james	ieqb
+1_peter	pTrom hraSonh
+2_peter	pTrom hSniih
+1_john	ioHnn hraSonh
+2_john	ioHnn hSniih
+3_john	ioHnn hSliSit
+jude	ihodh
+matthew	ihoSe lpi mti
+mark	ihoSe lpi mrqomi
+luke	ihoSe lpi loqm
+acts	meSi hSliHim
+john	ihoSe lpi ioHnn
+revelation	htglot ihoSe

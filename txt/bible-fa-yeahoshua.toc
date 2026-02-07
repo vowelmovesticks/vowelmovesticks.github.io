@@ -1,0 +1,66 @@
+genesis	در آغاز
+exodus	است
+leviticus	سخن
+numbers	در صحرا
+deuteronomy	کلمات
+joshua	یهوشع
+judges	داوران
+1_samuel	سموال 1
+2_samuel	سموال 2
+1_kings	پادشاهان 1
+2_kings	پادشاهان 2
+isaiah	یشعیهو
+jeremiah	یرمیهو
+ezekiel	یحزقیال
+hosea	هوشع
+joel	یوال
+amos	عاموس
+obadiah	عوبدیه
+jonah	یونس
+micah	میکاه
+nahum	ناحوم
+habakkuk	حبقوق
+zephaniah	صفنیه
+haggai	حجی
+zechariah	زکریه
+malachi	ملاکی
+psalms	تهیلیم
+proverbs	امثال
+job	ایوب
+songs	غزل غزل‌های
+ruth	روت
+lamentations	چگونه	how
+ecclesiastes	جامعه
+esther	استر
+daniel	دانیال
+ezra	عزرا
+nehemiah	نحمیا
+1_chronicles	کلمات روز 1
+2_chronicles	کلمات روز 2
+romans	رومیان
+1_corinthians	 قرنتیان 1
+2_corinthians	 2 قرنتیان
+galatians	غلاطیان
+ephesians	افسسیان
+philippians	فیلیپیان
+colossians	کولسیان
+1_thessalonians	تسالونیکیان 1
+2_thessalonians	تسالونیکیان 2
+1_timothy	تیموتائوس 1
+2_timothy	تیموتائوس 2
+titus	تیتوس
+philemon	فلیمون
+hebrews	عبرانیان
+james	یعقوب
+1_peter	پطرس 1
+2_peter	پطرس 2
+1_john	یوحنا 1
+2_john	یوحنا 2
+3_john	یوحنا 3
+jude	یهودا
+matthew	متی
+mark	مَرقُس
+luke	لوقا
+acts	اعمال رسولان
+john	یوحنا
+revelation	مکاشفه

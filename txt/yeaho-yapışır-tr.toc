@@ -1,0 +1,66 @@
+genesis	Başlangıç
+exodus	Adlar
+leviticus	Ve çağırdı
+numbers	Çölde
+deuteronomy	Sözler
+joshua	Yeahoşua
+judges	Hakimler
+1_samuel	1. Şemuel
+2_samuel	2. Şemuel
+1_kings	1. Krallar
+2_kings	2. Krallar
+isaiah	Yeşuayeaho
+jeremiah	Yirmeyeaho
+ezekiel	Yehezqiel
+hosea	Hoşea
+joel	Yoel
+amos	Amos
+obadiah	Ovadyeah
+jonah	Yunus
+micah	Mika
+nahum	Nahum
+habakkuk	Habaquq
+zephaniah	Sefanyeah
+haggai	Haggay
+zechariah	Zekeriyeah
+malachi	Malaki
+psalms	Mezmurlar
+proverbs	Süleyman'ın Özdeyişleri
+job	Eyüp
+songs	Ezgiler Ezgisi
+ruth	Rut
+lamentations	Ağıtlar
+ecclesiastes	Vaiz
+esther	Ester
+daniel	Daniel
+ezra	Ezra
+nehemiah	Nehemyeah
+1_chronicles	1. Günün Sözleri
+2_chronicles	2. Günün Sözleri
+romans	Romalılar
+1_corinthians	1. Korintoslular
+2_corinthians	2. Korintoslular
+galatians	Galatyalılar
+ephesians	Efesoslular
+philippians	Filipililer
+colossians	Koloseliler
+1_thessalonians	1. Selanikliler
+2_thessalonians	2. Selanikliler
+1_timothy	1. Timoteos
+2_timothy	2. Timoteos
+titus	Titus
+philemon	Filimon
+hebrews	İbraniler
+james	Yaqup
+1_peter	1. Petrus
+2_peter	2. Petrus
+1_john	1. Yuhanna
+2_john	2. Yuhanna
+3_john	3. Yuhanna
+jude	Yeahuda
+matthew	Matta'ya göre Yeahoşua
+mark	Markos'a göre Yeahoşua
+luke	Luka'ya göre Yeahoşua
+acts	Elçilerin İşleri
+john	Yuhanna'ya göre Yeahoşua
+revelation	Vahiy

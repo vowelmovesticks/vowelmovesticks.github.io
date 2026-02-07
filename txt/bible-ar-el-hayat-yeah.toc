@@ -1,0 +1,66 @@
+genesis	فِي الْبَدْءِ	בראשית
+exodus	أسماء	שמות
+leviticus	ودعا	ויקרא
+numbers	في الصحراء	במדבר
+deuteronomy	كلمات	דברים
+joshua	يهوشُوع	יהושע
+judges	قُضاة	שפטים
+1_samuel	سمُوال ا	שמואל a
+2_samuel	سمُوال ب	שמואל b
+1_kings	مُلُوك ا	מלכים a
+2_kings	مُلُوك ب	מלכים b
+isaiah	يشَعْيهو	ישעיהו
+jeremiah	يرْمِيهو	ירמיהו
+ezekiel	يحِزْقِال	יחזקאל
+hosea	هُوشَع	הושע
+joel	يُوال	יואל
+amos	عامُوس	עמוס
+obadiah	عُوبَدْيه	עובדיה
+jonah	يُونان	יונה
+micah	ميخه	מיכה
+nahum	ناحُوم	נחום
+habakkuk	حَبَقُّوق	חבקוק
+zephaniah	صَفَنْيه	צפניה
+haggai	حَجَّي	חגיי
+zechariah	زَكَريّه	זכריה
+malachi	مَلاخِي	מלאכי
+psalms	هلل	תהילים
+proverbs	الأمثال	משלי
+job	أيُّوب	איוב
+songs	نَشِيد الأنشاد	שיר השירים
+ruth	روت	רות
+lamentations	كَيْفَ	איכה
+ecclesiastes	أَقْوَالُ	קוהלת
+esther	أسْتِير	אסתר
+daniel	دانيال	דניאל
+ezra	عَزْرا	עזרא
+nehemiah	نَحَمْيه	נחמיה
+1_chronicles	كلمات الايام ا
+2_chronicles	كلمات الايام ب
+romans	رُوما
+1_corinthians	كورنثوس ا
+2_corinthians	كورنثوس ب
+galatians	غَلاطِيَّة
+ephesians	أفَسُس
+philippians	فِيلِبِّي
+colossians	كُولُوسِي
+1_thessalonians	تسالونيكي ا
+2_thessalonians	تسالونيكي ب
+1_timothy	تيموثاوس ا
+2_timothy	تيموثاوس ب
+titus	تِيطُس	
+philemon	فِلِيْمُون
+hebrews	عِبرانِيّين
+james	يَعقُوب
+1_peter	بطر 
+2_peter	بطر ب
+1_john	يوحنَّا ا
+2_john	يوحنَّا ب
+3_john	يوحنَّا ج
+jude	يَهُوذا
+matthew	مَتَّى
+mark	مَرْقُ
+luke	لُوقا
+acts	أعمال
+john	يوحنَّا
+revelation	رُؤيا

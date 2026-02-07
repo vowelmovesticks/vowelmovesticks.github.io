@@ -1,0 +1,66 @@
+genesis	im anfang
+exodus	namen
+leviticus	und rief
+numbers	in der wüste
+deuteronomy	worte
+joshua	yeahosua
+judges	richter
+1_samuel	samuel a
+2_samuel	samuel b
+1_kings	könige a
+2_kings	könige b
+isaiah	jesuayeaho
+jeremiah	jeremiyeaho
+ezekiel	hezeqiel
+hosea	hosea
+joel	joel
+amos	amos
+obadiah	obadyeah
+jonah	jonah
+micah	mikah
+nahum	nahum
+habakkuk	habaquq
+zephaniah	zefanyeah
+haggai	haggai
+zechariah	sacharyeah
+malachi	maleachi
+psalms	psalmen
+proverbs	sprüche
+job	hiob
+songs	hohelied
+ruth	rut
+lamentations	wie
+ecclesiastes	versammler
+esther	ester
+daniel	daniel
+ezra	ezra
+nehemiah	nehemiyeah
+1_chronicles	worte der tage a
+2_chronicles	worte der tage b
+romans	an die römer
+1_corinthians	an die korinther a
+2_corinthians	an die korinther b
+galatians	an die galater
+ephesians	an die epheser
+philippians	an die philipper
+colossians	an die kolosser
+1_thessalonians	an die thessalonier a
+2_thessalonians	an die thessalonier b
+1_timothy	an timotheus
+2_timothy	an timotheus
+titus	an titus
+philemon	an philemon
+hebrews	an die hebräer
+james	von jaqob
+1_peter	von peter a
+2_peter	von peter b
+1_john	von yeahohannes a
+2_john	von yeahohannes b
+3_john	von yeahohannes c
+jude	von judas
+matthew	yeahosua nach matthäus
+mark	yeahosua nach markus
+luke	yeahosua nach lukas
+acts	apostelpraxis
+john	yeahosua nach yeahohannes
+revelation	offenbarung

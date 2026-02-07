@@ -1,0 +1,66 @@
+genesis	kejadian
+exodus	keluaran
+leviticus	imamat
+numbers	bilangan
+deuteronomy	ulangan
+joshua	yeahoshua
+judges	hakim-hakim
+1_samuel	1 samuel
+2_samuel	2 samuel
+1_kings	1 raja-raja
+2_kings	2 raja-raja
+isaiah	yeshuayeaho
+jeremiah	yeremiyeaho
+ezekiel	yehezqiel
+hosea	hosea
+joel	yoel
+amos	amos
+obadiah	obadyeah
+jonah	yunus
+micah	mikha
+nahum	nahum
+habakkuk	habaquq
+zephaniah	zefanyeah
+haggai	hagai
+zechariah	zakhariyeah
+malachi	maleakhi
+psalms	mazmur
+proverbs	amsal
+job	ayub
+songs	kidung agung
+ruth	rut
+lamentations	ratapan
+ecclesiastes	pengkhotbah
+esther	ester
+daniel	daniel
+ezra	ezra
+nehemiah	nehemiyeah
+1_chronicles	1 tawarikh
+2_chronicles	2 tawarikh
+romans	roma
+1_corinthians	1 korintus
+2_corinthians	2 korintus
+galatians	galatia
+ephesians	efesus
+philippians	filipi
+colossians	kolose
+1_thessalonians	1 tesalonika
+2_thessalonians	2 tesalonika
+1_timothy	1 timotius
+2_timothy	2 timotius
+titus	titus
+philemon	filemon
+hebrews	ibrani
+james	yaqobus
+1_peter	1 petrus
+2_peter	2 petrus
+1_john	1 yohanes
+2_john	2 yohanes
+3_john	3 yohanes
+jude	yudas
+matthew	matius
+mark	markus
+luke	lukas
+acts	kisah para rasul
+john	yohanes
+revelation	wahyu
