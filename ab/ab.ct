@@ -13,7 +13,7 @@ do something about the big index file.
 <head>
   <meta charset='utf-8'>
   <script src="shorthand.js"></script>
-  <script src="biblepaste.js"></script>
+  <script src="kpaste.js"></script>
   <script src="lingobin.js"></script> <!-- for now comment out the last line manually, module.exports = lingobin -->
   <!-- <script src="zh-ja-breaks.js"></script>-->
 
@@ -140,13 +140,33 @@ main js holds the code.
 main()
 ``
 
+main builds the menues, fills them with values from the url search
+params if given, and shows bibles, if given.
+
 ``/main:
-function main() {
-  makeselect()
-  
-  initww()
-  inittlit()
+console.log("hello main")
+async function main() {
+  ``.``
 }
+``
+
+await the menu building calls, so that biblechange can use their
+values.
+
+``
+  await initww()
+  
+  await inittlit()
+
+  await makeselect()
+  console.log("sel[a].value: " + sel["a"].value)
+``
+
+kick off the display for whatever's selected in box a and box b.
+
+``
+  await biblechange("a")
+  await biblechange("b")
 ``
 
 # bible selection and display cycle
@@ -181,19 +201,15 @@ fill them with the languages and the corresponding bible files.
 
 ``
   var res = await fetch("names.json")
+  console.log("fetch names done")  
   var langtofile = await res.json()
+  console.log("res.json done")    
   for (var lang of keys(langtofile)) {
     elm("option", { value: langtofile[lang] }, sel["a"], lang)
     elm("option", { value: langtofile[lang] }, sel["b"], lang)
   }
 ``
 
-give them change listeners.
-
-``
-  sel["a"].addEventListener("change", function() {bibleselect("a")}) // maybe selected("a")
-  sel["b"].addEventListener("change", function() {bibleselect("b")})
-``
 
 get the files from the url params (if there). if not, pre-set the
 first to english and the second to hebrew.
@@ -205,15 +221,19 @@ first to english and the second to hebrew.
   if (bookb == null) { bookb = "bible-he-yeahoshua" }
 ``
 
-select them and kick off the display. at the moment biblechange()
-needs to be called here and not from main, why?
+select them.
 
 ``
   sel["a"].value = booka
   sel["b"].value = bookb
+  console.log("sel made")
+``
 
-  biblechange("a")
-  biblechange("b")
+give them change listeners.
+
+``
+  sel["a"].addEventListener("change", function() {bibleselect("a")}) // maybe selected("a")
+  sel["b"].addEventListener("change", function() {bibleselect("b")})
 ``
 
 bibleselect clears the hash and calls biblechange.
@@ -266,9 +286,11 @@ get the bible file and toc.
 if not both texts are there, don't update the display.
 
 ``
+  console.log("text a null: " + (text["a"] == null) + ", text b null: " + (text["b"] == null))
   if (text["a"] == null || text["b"] == null) {
     return
   }
+  console.log("before updatepaste")
 ``
 
 update the pasted bibles and the toc.
@@ -341,18 +363,19 @@ wire in the checkboxes.
   check["b"] = document.querySelector("#check_b")
 ``
 
-give them change listeners.
-
-``
-  check["a"].addEventListener("change", function() { oncheck("a") })
-  check["b"].addEventListener("change", function() { oncheck("b") })
-``
 
 set their initial values from search params.
 
 ``
   if (getparam("ww_a") == "true") { check["a"].checked = true }
   if (getparam("ww_b") == "true") { check["b"].checked = true }
+``
+
+give them change listeners.
+
+``
+  check["a"].addEventListener("change", function() { oncheck("a") })
+  check["b"].addEventListener("change", function() { oncheck("b") })
 ``
 
 
@@ -400,6 +423,13 @@ wire up the translit checkboxes.
   tlitcheck["b"] = document.querySelector("#tlit_b")
 ``
 
+set their initial values from search params.
+
+``
+  if (getparam("tlit_a") == "true") { tlitcheck["a"].checked = true }
+  if (getparam("tlit_b") == "true") { tlitcheck["b"].checked = true }
+``
+
 give them change listeners.
 
 ``
@@ -407,12 +437,6 @@ give them change listeners.
   tlitcheck["b"].addEventListener("change", function() { ontlit("b") })
 ``
 
-set their initial values from search params.
-
-``
-  if (getparam("tlit_a") == "true") { tlitcheck["a"].checked = true }
-  if (getparam("tlit_b") == "true") { tlitcheck["b"].checked = true }
-``
 
 the displaying functions read whether tlit is on from here.
 
@@ -460,12 +484,22 @@ function buildtoc(toctext) {
 updatepaste pastes the current selected bibles and saves them in a
 dictionary that's keyed by book.
 
+for now kpaste can't extract the book order from a and b, cause that
+might be a bit difficult if they don't contain the same books. for
+now, pass the book order here.
+
 updatepaste gets called when a bible is selected, the bibles it pastes
 are used by renderbook later.
 
 ``/updatepaste:
 function updatepaste() {
-  pasted = biblepaste(text["a"], text["b"]).split("\n")
+  console.log("before kpaste")
+
+  var books = ["genesis","exodus","leviticus","numbers","deuteronomy","joshua","judges","1_samuel","2_samuel","1_kings","2_kings","isaiah","jeremiah","ezekiel","hosea","joel","amos","obadiah","jonah","micah","nahum","habakkuk","zephaniah","haggai","zechariah","malachi","psalms","proverbs","job","songs","ruth","lamentations","ecclesiastes","esther","daniel","ezra","nehemiah","1_chronicles","2_chronicles","romans","1_corinthians","2_corinthians","galatians","ephesians","philippians","colossians","1_thessalonians","2_thessalonians","1_timothy","2_timothy","titus","philemon","hebrews","james","1_peter","2_peter","1_john","2_john","3_john","jude","matthew","mark","luke","acts","john","revelation"]
+  
+  pasted = kpaste(text["a"], text["b"], books)
+  
+  console.log("after kpaste")  
 }
 ``
 
@@ -662,7 +696,8 @@ return.
   return out
 ``
 
-biblebookchap returns the text of the bible with interspersed ##book and ##chapter lines
+biblebookchap inserts ##book and ##chapter lines into kpaste output
+lines. it returns plain text.
 
 when getting html from the text files we try to go from the source
 format lines with versetags to an intermediary format that marks where
@@ -679,13 +714,10 @@ function biblebookchap(lines, tocs) {
   var inchap = null
   var out = []
   for (var l of lines) {
-    if (!l.match(/\t/)) { continue }
-    var a = l.split(/[ :]/)
-    if (a.length < 2) { continue }
+    var thisversetag = l[0]
+    var a = thisversetag.split(/[ :]/)
     var thisbook = a[0]
     var thischap = a[1]
-    var b = l.split(/\t/)
-    var thisversetag = b[0]
     // put the versetag with in, so that these lines are 'greppable' by book
     if (thisbook != inbook) {
       out.push(thisversetag + "\t##book " + getprintbook(thisbook, tocs[0], tocs[1])) // for two tocs for now
@@ -697,7 +729,7 @@ function biblebookchap(lines, tocs) {
     }
     // wait with the book update here in case the last book was only with one chapter
     inbook = thisbook
-    out.push(l)
+    out.push(l[0] + "\t" + l[1] + "\t" + l[2])
   }
   return out
 }
@@ -746,11 +778,12 @@ function insertwwtlit(lines) {
   ``loop``
   ``ret``
 }
+``
 
 it slices the lines open, puts in word by word where selected, and
 returns the lines with the word by word html.
 
-``/loop:
+``/insertwwtlit/loop:
   out = []
   for (var line of lines) {
     var outline = ""
@@ -794,10 +827,13 @@ insert translations for field b.
 	}
 ``
 
+somehow passing tlit to glhtml doesn't work at the moment, so translit
+now.
+
 insert translit for field a or b, if the box is checked.
 
 ``../tlit:
-        else {
+        //else {
 	  // console.log("tlit b: " + tlitcheck["b"].checked)
 	  // translit if set
 	  if (i == 1 && tlitcheck["a"].checked || i == 2 && tlitcheck["b"].checked) {
@@ -807,7 +843,7 @@ insert translit for field a or b, if the box is checked.
 	  } else { // else don't translit
 	    outline += "\t" + s
 	  }
-	}
+	//}
 ``
 
 if it's a format line, just append it.

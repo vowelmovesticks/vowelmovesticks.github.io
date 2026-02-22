@@ -8,35 +8,39 @@ var check = {}
 var pasted = {}
 var bybook = {}
 
-function main() {
-  makeselect()
+console.log("hello main")
+async function main() {
+  await initww()
   
-  initww()
-  inittlit()
+  await inittlit()
+
+  await makeselect()
+  console.log("sel[a].value: " + sel["a"].value)
+  await biblechange("a")
+  await biblechange("b")
 }
-// makeselect makes select fields and loads lang names
 async function makeselect() {
   var wrapa = document.getElementById("select_a")
   var wrapb = document.getElementById("select_b")
   sel["a"] = elm("select", {}, wrapa)
   sel["b"] = elm("select", {}, wrapb)
   var res = await fetch("names.json")
+  console.log("fetch names done")  
   var langtofile = await res.json()
+  console.log("res.json done")    
   for (var lang of keys(langtofile)) {
     elm("option", { value: langtofile[lang] }, sel["a"], lang)
     elm("option", { value: langtofile[lang] }, sel["b"], lang)
   }
-  sel["a"].addEventListener("change", function() {bibleselect("a")}) // maybe selected("a")
-  sel["b"].addEventListener("change", function() {bibleselect("b")})
   var booka = getparam("a")
   var bookb = getparam("b")
   if (booka == null) { booka = "yeahoshua-bible" }
   if (bookb == null) { bookb = "bible-he-yeahoshua" }
   sel["a"].value = booka
   sel["b"].value = bookb
-
-  biblechange("a")
-  biblechange("b")
+  console.log("sel made")
+  sel["a"].addEventListener("change", function() {bibleselect("a")}) // maybe selected("a")
+  sel["b"].addEventListener("change", function() {bibleselect("b")})
 }
 async function bibleselect(what) {
   sethash("")
@@ -57,31 +61,34 @@ async function biblechange(what) {
   } else { // set to null explicitly to clear old toc
     toc[what] = null
   }
+  console.log("text a null: " + (text["a"] == null) + ", text b null: " + (text["b"] == null))
   if (text["a"] == null || text["b"] == null) {
     return
   }
+  console.log("before updatepaste")
   updatepaste()
   updatebybook()
   updatetoc()
   render()
   oncheck(what)
 }
-// updatepaste pastes the current selected bibles and saves them in a dictionary that's keyed by book
 function updatepaste() {
-  pasted = biblepaste(text["a"], text["b"]).split("\n")
+  console.log("before kpaste")
+
+  var books = ["genesis","exodus","leviticus","numbers","deuteronomy","joshua","judges","1_samuel","2_samuel","1_kings","2_kings","isaiah","jeremiah","ezekiel","hosea","joel","amos","obadiah","jonah","micah","nahum","habakkuk","zephaniah","haggai","zechariah","malachi","psalms","proverbs","job","songs","ruth","lamentations","ecclesiastes","esther","daniel","ezra","nehemiah","1_chronicles","2_chronicles","romans","1_corinthians","2_corinthians","galatians","ephesians","philippians","colossians","1_thessalonians","2_thessalonians","1_timothy","2_timothy","titus","philemon","hebrews","james","1_peter","2_peter","1_john","2_john","3_john","jude","matthew","mark","luke","acts","john","revelation"]
+  
+  pasted = kpaste(text["a"], text["b"], books)
+  
+  console.log("after kpaste")  
 }
 function updatebybook() {
   var pastelines = biblebookchap(pasted, [toc["a"], toc["b"]])
   bybook = getbybook(pastelines)
 }
-// updatetoc updates the toc content and click listeners
 function updatetoc() {
-  // pull the book-tags as keys from bybooks
-  // maybe pull in more beautiful names from tocs
   var tocelm = elm("div", { class: "toc" })
   var booktags = Object.keys(bybook)
   // console.log("updatetoc() booktags: " + booktags)
-    
   for (var booktag of booktags) {
     //console.log("booktag: " + booktag)
     //console.log("toc: " + toc)
@@ -109,12 +116,11 @@ async function initww() {
   langcodes = await res.json()
   check["a"] = document.querySelector("#check_a")
   check["b"] = document.querySelector("#check_b")
-  check["a"].addEventListener("change", function() { oncheck("a") })
-  check["b"].addEventListener("change", function() { oncheck("b") })
   if (getparam("ww_a") == "true") { check["a"].checked = true }
   if (getparam("ww_b") == "true") { check["b"].checked = true }
+  check["a"].addEventListener("change", function() { oncheck("a") })
+  check["b"].addEventListener("change", function() { oncheck("b") })
 }
-// oncheck loads dict if needed for checkbox and kicks of render
 async function oncheck(what) {
   setparam("ww_" + what, check[what].checked)
   
@@ -129,16 +135,14 @@ async function oncheck(what) {
   render()
 }
 
-// inittlit finds tlit checkboxes and gives them event listeners
 function inittlit() {
   tlitcheck["a"] = document.querySelector("#tlit_a")
   tlitcheck["b"] = document.querySelector("#tlit_b")
-  tlitcheck["a"].addEventListener("change", function() { ontlit("a") })
-  tlitcheck["b"].addEventListener("change", function() { ontlit("b") })
   if (getparam("tlit_a") == "true") { tlitcheck["a"].checked = true }
   if (getparam("tlit_b") == "true") { tlitcheck["b"].checked = true }
+  tlitcheck["a"].addEventListener("change", function() { ontlit("a") })
+  tlitcheck["b"].addEventListener("change", function() { ontlit("b") })
 }
-// ontlit triggers rendering
 function ontlit(what) {
   console.log(tlitcheck[what].checked) 
   setparam("tlit_" + what, tlitcheck[what].checked)
@@ -147,8 +151,6 @@ function ontlit(what) {
   render()
 }
 
-// tohtml returns html from bookchap text
-// should it take lines or text?
 function tohtml(lines) {
   var html = ""
   for (var line of lines) {
@@ -203,13 +205,11 @@ function tohtml(lines) {
   }
   return html
 }
-// render renders book from param
 function render() {
   var book = getparam("book")
   if (book == null) { book = "genesis" }
   renderbook(book)
 }
-// buildtoc
 function buildtoc(toctext) {
   var lines = toctext.split("\n")
   var out = {}
@@ -220,7 +220,6 @@ function buildtoc(toctext) {
   }
   return out
 }
-// getbybook returns bible lines in dict keyed by book name
 function getbybook(lines) {
   var out = {}
   var thisbook = null
@@ -248,10 +247,11 @@ function getparam(what) {
 function getprintbook(booktag, toca, tocb) {
   var out = null
   //console.log("toca: " + toca + ", tocb:" + tocb)
-  // no toc is there, just return one booktag
+
   if (toca == null && tocb == null) {
     out = booktag
-  } else { // at least one toc is there, return both names
+  }
+  else {
     var booka = booktag
     // carry the translit
     if (toca != null) {
@@ -265,19 +265,15 @@ function getprintbook(booktag, toca, tocb) {
   }
   return out
 }
-// biblebookchap returns the text of the bible with interspersed ##book and ##chapter lines
 function biblebookchap(lines, tocs) {
   var inbook = null
   var inchap = null
   var out = []
   for (var l of lines) {
-    if (!l.match(/\t/)) { continue }
-    var a = l.split(/[ :]/)
-    if (a.length < 2) { continue }
+    var thisversetag = l[0]
+    var a = thisversetag.split(/[ :]/)
     var thisbook = a[0]
     var thischap = a[1]
-    var b = l.split(/\t/)
-    var thisversetag = b[0]
     // put the versetag with in, so that these lines are 'greppable' by book
     if (thisbook != inbook) {
       out.push(thisversetag + "\t##book " + getprintbook(thisbook, tocs[0], tocs[1])) // for two tocs for now
@@ -289,11 +285,10 @@ function biblebookchap(lines, tocs) {
     }
     // wait with the book update here in case the last book was only with one chapter
     inbook = thisbook
-    out.push(l)
+    out.push(l[0] + "\t" + l[1] + "\t" + l[2])
   }
   return out
 }
-// renderbook renders the clicked book in toc
 function renderbook(booktag) {
   setparam("book", booktag)
   console.log("renderbook " + booktag)
@@ -310,14 +305,11 @@ function renderbook(booktag) {
     if (el) { el.scrollIntoView() }
   }
 }
-// insertwwtlit inserts translit and word by word as selected on checkboxes into lines
 function insertwwtlit(lines) {
-  console.log("hello insert.")
   out = []
   for (var line of lines) {
     var outline = ""
     var f = line.split("\t")
-    // normal line
     if (!f[1].match(/^##/)) {
       outline = f[0]
       for (var i = 1; i < f.length; i++) {
@@ -325,11 +317,13 @@ function insertwwtlit(lines) {
         if (i == 1 && check["a"].checked) {
 	  s = quickfixends(s)
 	  outline += "\t" + ww.glhtml(s, langcodes[sel["a"].value], "en", tlitcheck["a"].checked)
-	} else if (i == 2 && check["b"].checked) {
+	}
+        else if (i == 2 && check["b"].checked) {
 	  s = quickfixends(s)
 	  // console.log(s)
 	  outline += "\t" + ww.glhtml(s, langcodes[sel["b"].value], "en", tlitcheck["b"].checked)
-	} else {
+	}
+        //else {
 	  // console.log("tlit b: " + tlitcheck["b"].checked)
 	  // translit if set
 	  if (i == 1 && tlitcheck["a"].checked || i == 2 && tlitcheck["b"].checked) {
@@ -339,14 +333,13 @@ function insertwwtlit(lines) {
 	  } else { // else don't translit
 	    outline += "\t" + s
 	  }
-	}
+	//}
       }
     }
-    // format line
     else {
       outline = line
     }
-    out.push(outline)
+    out.push(outline)    
   }
   return out
 }
@@ -366,7 +359,6 @@ function sethash(hash) {
     location.hash = "#" + hash
   }
 }
-// quickfixends puts hebrew and greek wordendings back to normal
 function quickfixends(s) {
   s = s.replace(/כ(\P{L})/gu, "ך$1") // actually k$1
   s = s.replace(/מ(\P{L})/gu, "ם$1")
