@@ -1,0 +1,27 @@
+we'd like to try a file to generate the index.html from txt
+
+<</indexfromfiles.sh
+rm index.tmp
+for file in $(ls txt/*.txt);
+do
+  <<.>>
+done
+>>
+
+get the name.
+<<
+  name=$(name $file)
+>>
+
+print the name, a link to the html file and a link to the txt file.
+
+<<
+  echo "$name <a href='html/$name.html'>read</a> <a href='txt/$name.txt'>txt</a> <br>" >> index.tmp
+>>
+
+wrap in html.
+
+<<
+cat index.tmp | htmlwrap "yeahoshua story" 
+rm index.tmp
+>>

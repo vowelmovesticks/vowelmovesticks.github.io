@@ -1,0 +1,36 @@
+genhtml generates bible html from the txt files.
+
+possibly from multi-column bible txt files, for now for one.
+
+``//genhtml.bash:
+for file in $(ls txt/*.txt);
+do
+  ``.``
+done
+``
+
+get the name.
+``
+  name=$(name $file)
+``
+
+extract the lang code from the name to set text direction later.
+extract two or three letters surrounded by dashes.
+if no lang code in name, text is displayed ltr.
+
+``
+  lang=`echo "$name" | gawk '{ match($0, /-(...?)-/, a); print a[1]}'`
+  if [[ $lang == "" ]]; then
+    lang="bla"
+  fi
+``
+
+set lang to bla so that not an empty language code is passed and the
+argument is skipped.
+
+turn the txt to html and write it in file
+
+``
+  cat "$file" | khtml --lang "$lang" --toc "txt/$name.toc" --toc-cols 2 > "html/$name.html"
+``
+

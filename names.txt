@@ -1,0 +1,38 @@
+albanian shqip	bible-sq-yeahozueu	sq
+arabic العربية	bible-ar-el-hayat-yeah	ar
+bulgarian български	bible-bg-yeahoshua	bg
+chichewa	bible-ny-yeahoswa	ny
+chinese 中文	bible-zh-yueshuya	zh
+czech čeština	yeaho-lepkavý-cs	cs
+danish dansk	bible-da-yeahosua	da
+dutch nederlands	bible-nl-yeahozua	nl
+english	yeahoshua-bible	en
+farsi فارسی	bible-fa-yeahoshua	fa
+finnish suomi	bible-fi-yeahosua	fi
+french français	yeaho-colle	fr
+german deutsch	yeahosua-bibel	de
+greek ελληνικά	bible-el-yeahoshua	el
+greek septuagint nt	lxx-brent-nt-sbl	el
+hausa	bible-ha-yeahoshuwa	ha
+hebrew עברית	bible-he-yeahoshua	he
+hebrew arabic translit	bible-he-yeahoshua-tlit-ar	he
+hebrew latin translit	bible-he-yeahoshua-tlit	
+hebrew vowels translit	tnk-he-vowtlit
+hindi हिन्दी	bible-hi-yeahoshoo	hi
+hungarian magyar	bible-hu-yeahozsue	hu
+indonesian bahasa indonesia	yeaho-melekat-id	id
+italian italiano	bible-it-yeahoshua	it
+korean 한국어	bible-ko-ihosua	ko
+norwegian norsk	bible-no-yeahosua	no
+polish polski	bible-pl-yeahozue	po
+portuguese português	bible-pt-yeahosue	pt
+russian русский	bible-ru-ihocuc	ru
+shona chishona	bible-sn-yeahoshua	sh
+spanish español	bible-es-yeahosue	es
+swahili kiswahili	bible-sw-yeahosua	sw
+swedish svenska	bible-sv-yeahosua	sv
+turkish türkçe	yeaho-yapışır-tr	tr
+ukrainian українська	bible-uk-ihocuc	uk
+vietnamese tiếng việt	bible-vi-yeahosue	vi
+wolof	   yeaho-ko-mu-ngi-wo	wo
+xhosa isixhosa	bible-xh-yeahoshuwa	xh
