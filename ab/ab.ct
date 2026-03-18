@@ -1,101 +1,8 @@
-ab: paste bibles.
-
-up next:
-
-rename check[] to wwcheck[]
+# ab: paste bibles
 
 translit array to json that can be loaded in chrome extension and here.
 
 do something about the big index file.
-
-``//index.html:
-<html>
-<head>
-  <meta charset='utf-8'>
-  <script src="shorthand.js"></script>
-  <script src="kpaste.js"></script>
-  <script src="lingobin.js"></script> <!-- for now comment out the last line manually, module.exports = lingobin -->
-  <!-- <script src="zh-ja-breaks.js"></script>-->
-
-  <!-- tlit scripts copied from chrome-ab/src/tlit -->
-  <script src="unicode-tlit-array.js"></script>
-  <script src="kanjidict.js"></script>
-  <script src="translit.js"></script>
-``
-
-``
-  <!-- fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!--<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">-->
-  <!--<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">-->
-  <link href='https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,400;1,400;0,700;1,700&display=swap' rel='stylesheet'>
-
-</head>
-``
-
-``
-<body dir=''>
-<style>
-body {
-  width: 500pt;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: justify;
-  font-size: 16pt;
-  font-family:'Source Serif 4', 'PT Serif', 'Georgia'
-}
-``
-
-``
-a { color: black; text-decoration: none; cursor: pointer }
-#tocwrap { column-count: 2 }
-#selectbar { margin: auto; width: fit-content; display: flex } /* need fit-content width for centering to work */
-#selectbar span { position: relative }
-#selectbar label { color: gray; }
-#selectbar select { font-family: 'PT Serif'}
-select { border: none; background: none; font-size: 14pt }
-#textwrap sup { /* color: gray */; font-size: 60%; cursor: pointer }
-/* sup on the left side of line */
-.ltr sup { padding-right: 5pt; }
-/* sup on the right side of line */
-.rtl sup { padding-left: 5pt; }
-</style>
-``
-
-``
-<div id="selectbar">
- <span>
-  <div id="select_a">
-  </div>
-  <input type="checkbox" id="tlit_a">
-  <label for="tlit_a">translit</label>
-  <br/>
-  <input type="checkbox" id="check_a">
-  <label for="check_a">word by word</label>
- </span>
- <span>
-  <div id="select_b">
-  </div>
-  <input type="checkbox" id="tlit_b">
-  <label for="tlit_b">translit</label>
-  <br/>
-  <input type="checkbox" id="check_b">
-  <label for="check_b">word by word</label>
- </span>
-</div>
-``
-
-``
-<br/>
-<div id="tocwrap" >
-</div>
-<div id="textwrap">
-</div>
-</body>
-<script src="main.js"></script>
-</html>
-``
 
 main js holds the code.
 
@@ -110,20 +17,15 @@ main js holds the code.
 ``updatebybook``
 ``updatetoc``
 ``bookclicked``
-``
 
-
-``
 ``initww``
-``oncheck``
+``onwwcheck``
 
 ``inittlit``
 ``ontlit``
 
 ``tohtml``
-``
 
-``
 ``render``
 ``buildtoc``
 ``getbybook``
@@ -311,8 +213,10 @@ and render the book.
 take into account the word-by-word-checkbox. this also triggers
 rendering of the text.
 
+why here?
+
 ``
-  oncheck(what)
+  onwwcheck(what)
 ``
 
 the toc dict.
@@ -340,8 +244,8 @@ names to langcodes, a variable ww that holds lingobin and a dict
 
 ``/vars
 var langcodes = {}
-var ww = new lingobin()
-var check = {}
+var ww = new stickylingo()
+var wwcheck = {}
 ``
 
 ``/initww:
@@ -360,38 +264,38 @@ load the mapping from the bible names to langcodes.
 wire in the checkboxes. 
 
 ``
-  check["a"] = document.querySelector("#check_a")
-  check["b"] = document.querySelector("#check_b")
+  wwcheck["a"] = document.querySelector("#wwcheck_a")
+  wwcheck["b"] = document.querySelector("#wwcheck_b")
 ``
 
 
 set their initial values from search params.
 
 ``
-  if (getparam("ww_a") == "true") { check["a"].checked = true }
-  if (getparam("ww_b") == "true") { check["b"].checked = true }
+  if (getparam("ww_a") == "true") { wwcheck["a"].checked = true }
+  if (getparam("ww_b") == "true") { wwcheck["b"].checked = true }
 ``
 
 give them change listeners.
 
 ``
-  check["a"].addEventListener("change", function() { oncheck("a") })
-  check["b"].addEventListener("change", function() { oncheck("b") })
+  wwcheck["a"].addEventListener("change", function() { onwwcheck("a") })
+  wwcheck["b"].addEventListener("change", function() { onwwcheck("b") })
 ``
 
 
 the checkbox event listener.
 
-oncheck loads dict if needed for checkbox and kicks of render.
+onwwcheck loads dict if needed for checkbox and kicks of render.
 
-``/oncheck:
-async function oncheck(what) {
-  setparam("ww_" + what, check[what].checked)
+``/onwwcheck:
+async function onwwcheck(what) {
+  setparam("ww_" + what, wwcheck[what].checked)
   
   var langcode = langcodes[sel[what].value]
 
   // we need a dict
-  if (check[what].checked && !ww.hasdict(langcode)) {
+  if (wwcheck[what].checked && !ww.hasdict(langcode)) {
     var res = await fetch("../dicts/dict-" + langcode + ".json")
     var d = await res.json()
     ww.adddict(d)
@@ -809,19 +713,19 @@ if it's a normal line insert translations and translit.
     }
 ``
 
-insert translations for field a.
+insert word-by-word for field a.
 
 ``./field a:
-        if (i == 1 && check["a"].checked) {
+        if (i == 1 && wwcheck["a"].checked) {
 	  s = quickfixends(s)
 	  outline += "\t" + ww.glhtml(s, langcodes[sel["a"].value], "en", tlitcheck["a"].checked)
 	}
 ``
 
-insert translations for field b.
+insert word-by-word for field b.
 
 ``../field b:
-        else if (i == 2 && check["b"].checked) {
+        else if (i == 2 && wwcheck["b"].checked) {
 	  s = quickfixends(s)
 	  // console.log(s)
 	  outline += "\t" + ww.glhtml(s, langcodes[sel["b"].value], "en", tlitcheck["b"].checked)
@@ -831,10 +735,10 @@ insert translations for field b.
 somehow passing tlit to glhtml doesn't work at the moment, so translit
 now.
 
-insert translit for field a or b, if the box is checked.
+append the translit line for field a or b, if only tlit is checked.
 
 ``../tlit:
-        //else {
+        else {
 	  // console.log("tlit b: " + tlitcheck["b"].checked)
 	  // translit if set
 	  if (i == 1 && tlitcheck["a"].checked || i == 2 && tlitcheck["b"].checked) {
@@ -844,7 +748,7 @@ insert translit for field a or b, if the box is checked.
 	  } else { // else don't translit
 	    outline += "\t" + s
 	  }
-	//}
+	}
 ``
 
 if it's a format line, just append it.

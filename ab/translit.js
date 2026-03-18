@@ -1,18 +1,11 @@
-var unicodeDict = new Map()
-for (var entry of unicodeDictArray) {
-    unicodeDict.set(entry[0], entry[1])
+// hack for now.
+var kanjiDict = {}
+for (var entry of kanjiDictArray) {
+    // if values appear more than once, take the last, it's probably from the edit file
+    kanjiDict[entry[0]] = entry[1]
 }
-/*var unicodeDict = {}
-for (var entry of unicodeDictArray) {
-    unicodeDict[entry[0]] = entry[1]
-}*/
 
-//console.log("unicode dict:" + JSON.stringify(unicodeDict, null, " "))
 
-var kanjiDict = new Map()
-for (var entry of kanjiDict) {
-    kanjiDict.set(entry[0], entry[1])
-}
 
 // isLatin returns if s.charAt(i) is latin.
 // if c is a combining diacritical mark, return true if the nearest letter previous (or the nearest letter next, to-do?) are of latin script
@@ -33,13 +26,29 @@ function isCombiningDiacriticalMark(c) {
     return c.match(/[\u0300-\u036f]/u) // u0300-u036f: range of \p{Block=CombiningDiacriticalMarks}
 }
 
-function translit(oldTextContent, translitLatin) {
+
+/* translit transliterates text.
+   standard args: { translitLatin: false, insertBlanks: true }
+*/
+
+function translit(oldTextContent, args) {
     if (!oldTextContent) {
 	return ""
     }
+
+    var translitLatin = false
+    if ("translitLatin" in args) {
+	translitLatin = args.translitLatin
+    }
+    var insertBlanks = true // see ~/bash-translit/translit.js for more blank options, maybe merge them here.
+    if ("insertBlanks" in args) {
+	insertBlanks = args.insertBlanks
+    }
+    //console.log("insertBlanks: " + insertBlanks)
+    
     // insert blanks in chinese or thai
-    var nblanks = (oldTextContent.match(/ /g) || []).length
-    var insertBlanks = false
+    //var nblanks = (oldTextContent.match(/ /g) || []).length
+    //var insertBlanks = false
 
     var greekhused = false
     
@@ -56,11 +65,11 @@ function translit(oldTextContent, translitLatin) {
 	}
 
 	// number and last character chinese? insert blank
-	if (c.match(/\p{N}/u) && i > 0 && oldTextContent.charAt(i-1).match(/[\u3400-\u9FBF]/)) {
+	if (insertBlanks && c.match(/\p{N}/u) && i > 0 && oldTextContent.charAt(i-1).match(/[\u3400-\u9FBF]/)) {
 	    newTextContent += " "
 	} 
 	// japanese, hiragana, katakana, kanji? insert blanks.
-	if (c.match(/\p{Script=Hiragana}/u) || c.match(/\p{Script=Katakana}/u) || c.match(/[\u4e00-\u9fbf]/)) {
+	if (insertBlanks && (c.match(/\p{Script=Hiragana}/u) || c.match(/\p{Script=Katakana}/u) || c.match(/[\u4e00-\u9fbf]/))) {
 	    newTextContent += " "
 	}
 
@@ -104,18 +113,18 @@ function translit(oldTextContent, translitLatin) {
 	}
 
 	newC = c;
-	if(unicodeDict.has(c)) {
+	if(c in unicodeDict) {
 //	if (unicodeDict[c]) {
-	    newC = unicodeDict.get(c)
+	    newC = unicodeDict[c]
 	    //newC = unicodeDict[c]
 	}
 	// japanese kanji? (the chinese glyphs in japanese language)
-	if ( /[\u4e00-\u9fbf]/.test(c) && kanjiDict.has(c) && isJapanese(oldTextContent)) {
-	    newC = kanjiDict.get(c)
+	if ( /[\u4e00-\u9fbf]/.test(c) && c in kanjiDict && isJapanese(oldTextContent)) {
+	    newC = kanjiDict[c]
 	}
 
 	// chinese, and next character letter? insert blank
-	if (/[\u3400-\u9FBF]/.test(c) && i < oldTextContent.length-1 && oldTextContent.charAt(i+1).match(/\p{Letter}/u)) {
+	if (insertBlanks && /[\u3400-\u9FBF]/.test(c) && i < oldTextContent.length-1 && oldTextContent.charAt(i+1).match(/\p{Letter}/u)) {
 	    newTextContent += " "
 	}
 
@@ -126,23 +135,6 @@ function translit(oldTextContent, translitLatin) {
     return newTextContent
 }
 
-function isJapanese(text) {
-    return text.match(/\p{Script=Hiragana}/ug) || text.match(/\p{Script=Katakana}/ug)
-}
-
-// nextLetter returns the next letter in s
-function nextLetter(s, i) {
-    var j = nextLetterI(s, i)
-    if (j == -1) { return null }
-    return s.charAt(j)
-}
-
-// prevLetter returns the previous letter in s
-function prevLetter(s, i) {
-    var j = prevLetterI(s, i)
-    if (j == -1) { return null }
-    return s.charAt(j)
-}
 
 // nextLetterI returns index of the next letter in s starting at i
 // if none return -1
@@ -160,4 +152,23 @@ function prevLetterI(s, i) {
 	if (s.charAt(j).match(/\p{L}/u)) return j
     }
     return -1
+}
+
+// nextLetter returns the next letter in s
+function nextLetter(s, i) {
+    var j = nextLetterI(s, i)
+    if (j == -1) { return null }
+    return s.charAt(j)
+}
+
+// prevLetter returns the previous letter in s
+function prevLetter(s, i) {
+    var j = prevLetterI(s, i)
+    if (j == -1) { return null }
+    return s.charAt(j)
+}
+
+// isJapanese returns whether the text is japanese
+function isJapanese(text) {
+    return text.match(/\p{Script=Hiragana}/ug) || text.match(/\p{Script=Katakana}/ug)
 }

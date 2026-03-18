@@ -2,6 +2,7 @@
 
 all: names.json langcodes.json
 	ct ab.ct
+	ct index.ct
 names.json: ../names.txt
 	cut -f 1,2 ../names.txt | jdict > names.json
 langcodes.json: ../names.txt

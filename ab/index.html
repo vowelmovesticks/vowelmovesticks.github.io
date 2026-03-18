@@ -3,11 +3,11 @@
   <meta charset='utf-8'>
   <script src="shorthand.js"></script>
   <script src="kpaste.js"></script>
-  <script src="lingobin.js"></script> <!-- for now comment out the last line manually, module.exports = lingobin -->
+  <script src="stickylingo.js"></script> <!-- for now comment out the last line manually, module.exports = lingobin -->
   <!-- <script src="zh-ja-breaks.js"></script>-->
 
   <!-- tlit scripts copied from chrome-ab/src/tlit -->
-  <script src="unicode-tlit-array.js"></script>
+  <script src="unicode-tlit.js"></script>
   <script src="kanjidict.js"></script>
   <script src="translit.js"></script>
   <!-- fonts -->
@@ -15,57 +15,62 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!--<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">-->
   <!--<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">-->
+  <!--source serif 4-->
   <link href='https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,400;1,400;0,700;1,700&display=swap' rel='stylesheet'>
-
+  <!--source sans 3-->
+  <link href='https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;1,400;0,700;1,700&display=swap' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,400;0,700;1,700&display=swap' rel='stylesheet'>
 </head>
 <body dir=''>
-<style>
-body {
-  width: 500pt;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: justify;
-  font-size: 16pt;
-  font-family:'Source Serif 4', 'PT Serif', 'Georgia'
-}
-a { color: black; text-decoration: none; cursor: pointer }
-#tocwrap { column-count: 2 }
-#selectbar { margin: auto; width: fit-content; display: flex } /* need fit-content width for centering to work */
-#selectbar span { position: relative }
-#selectbar label { color: gray; }
-#selectbar select { font-family: 'PT Serif'}
-select { border: none; background: none; font-size: 14pt }
-#textwrap sup { /* color: gray */; font-size: 60%; cursor: pointer }
-/* sup on the left side of line */
-.ltr sup { padding-right: 5pt; }
-/* sup on the right side of line */
-.rtl sup { padding-left: 5pt; }
-</style>
-<div id="selectbar">
- <span>
-  <div id="select_a">
+  <style>
+  body {
+    width: 500pt;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+    font-size: 16pt;
+    /*font-family:'Source Serif 4', 'PT Serif', 'Georgia'*/
+    font-family:"Source Sans 3", sans-serif; /*, 'PT Serif', 'Georgia'*/
+  }
+  h2 { font-family:"Barlow", sans-serif; }
+  a { color: black; text-decoration: none; cursor: pointer }
+  #tocwrap { column-count: 2; font-family: "Barlow", sans-serif; font-weight: bold; text-transform: uppercase; font-size: 14pt; line-height: 1.5; }
+  #selectbar { margin: auto; width: fit-content; display: flex } /* need fit-content width for centering to work */
+  #selectbar span { position: relative }
+  #selectbar label { color: gray; }
+  #selectbar select { font-family: "Source Sans 3"}
+  select { border: none; background: none; font-size: 14pt }
+  #textwrap sup { /* color: gray */; font-size: 60%; cursor: pointer }
+  /* sup on the left side of line */
+  .ltr sup { padding-right: 5pt; }
+  /* sup on the right side of line */
+  .rtl sup { padding-left: 5pt; }
+  </style>
+  <div id="selectbar">
+   <span>
+    <div id="select_a">
+    </div>
+    <input type="checkbox" id="tlit_a">
+    <label for="tlit_a">translit</label>
+    <br/>
+    <input type="checkbox" id="wwcheck_a">
+    <label for="wwcheck_a">word by word</label>
+   </span>
+   <span>
+    <div id="select_b">
+    </div>
+    <input type="checkbox" id="tlit_b">
+    <label for="tlit_b">translit</label>
+    <br/>
+    <input type="checkbox" id="wwcheck_b">
+    <label for="wwcheck_b">word by word</label>
+   </span>
   </div>
-  <input type="checkbox" id="tlit_a">
-  <label for="tlit_a">translit</label>
   <br/>
-  <input type="checkbox" id="check_a">
-  <label for="check_a">word by word</label>
- </span>
- <span>
-  <div id="select_b">
+  <div id="tocwrap" >
   </div>
-  <input type="checkbox" id="tlit_b">
-  <label for="tlit_b">translit</label>
-  <br/>
-  <input type="checkbox" id="check_b">
-  <label for="check_b">word by word</label>
- </span>
-</div>
-<br/>
-<div id="tocwrap" >
-</div>
-<div id="textwrap">
-</div>
+  <div id="textwrap">
+  </div>
 </body>
 <script src="main.js"></script>
 </html>

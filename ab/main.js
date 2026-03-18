@@ -2,8 +2,8 @@ var sel = {}
 var toc = {}
 var text = {}
 var langcodes = {}
-var ww = new lingobin()
-var check = {}
+var ww = new stickylingo()
+var wwcheck = {}
   tlitcheck = {}
 var pasted = {}
 var bybook = {}
@@ -70,7 +70,7 @@ async function biblechange(what) {
   updatebybook()
   updatetoc()
   render()
-  oncheck(what)
+  onwwcheck(what)
 }
 function updatepaste() {
   console.log("before kpaste")
@@ -111,23 +111,24 @@ function bookclicked(booktag) {
   // render the book
   renderbook(booktag)
 }
+
 async function initww() {
   var res = await fetch("langcodes.json")
   langcodes = await res.json()
-  check["a"] = document.querySelector("#check_a")
-  check["b"] = document.querySelector("#check_b")
-  if (getparam("ww_a") == "true") { check["a"].checked = true }
-  if (getparam("ww_b") == "true") { check["b"].checked = true }
-  check["a"].addEventListener("change", function() { oncheck("a") })
-  check["b"].addEventListener("change", function() { oncheck("b") })
+  wwcheck["a"] = document.querySelector("#wwcheck_a")
+  wwcheck["b"] = document.querySelector("#wwcheck_b")
+  if (getparam("ww_a") == "true") { wwcheck["a"].checked = true }
+  if (getparam("ww_b") == "true") { wwcheck["b"].checked = true }
+  wwcheck["a"].addEventListener("change", function() { onwwcheck("a") })
+  wwcheck["b"].addEventListener("change", function() { onwwcheck("b") })
 }
-async function oncheck(what) {
-  setparam("ww_" + what, check[what].checked)
+async function onwwcheck(what) {
+  setparam("ww_" + what, wwcheck[what].checked)
   
   var langcode = langcodes[sel[what].value]
 
   // we need a dict
-  if (check[what].checked && !ww.hasdict(langcode)) {
+  if (wwcheck[what].checked && !ww.hasdict(langcode)) {
     var res = await fetch("../dicts/dict-" + langcode + ".json")
     var d = await res.json()
     ww.adddict(d)
@@ -205,6 +206,7 @@ function tohtml(lines) {
   }
   return html
 }
+
 function render() {
   var book = getparam("book")
   if (book == null) { book = "genesis" }
@@ -314,16 +316,16 @@ function insertwwtlit(lines) {
       outline = f[0]
       for (var i = 1; i < f.length; i++) {
         var s = f[i]
-        if (i == 1 && check["a"].checked) {
+        if (i == 1 && wwcheck["a"].checked) {
 	  s = quickfixends(s)
 	  outline += "\t" + ww.glhtml(s, langcodes[sel["a"].value], "en", tlitcheck["a"].checked)
 	}
-        else if (i == 2 && check["b"].checked) {
+        else if (i == 2 && wwcheck["b"].checked) {
 	  s = quickfixends(s)
 	  // console.log(s)
 	  outline += "\t" + ww.glhtml(s, langcodes[sel["b"].value], "en", tlitcheck["b"].checked)
 	}
-        //else {
+        else {
 	  // console.log("tlit b: " + tlitcheck["b"].checked)
 	  // translit if set
 	  if (i == 1 && tlitcheck["a"].checked || i == 2 && tlitcheck["b"].checked) {
@@ -333,7 +335,7 @@ function insertwwtlit(lines) {
 	  } else { // else don't translit
 	    outline += "\t" + s
 	  }
-	//}
+	}
       }
     }
     else {

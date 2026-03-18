@@ -41,8 +41,9 @@ class lingobin {
      	 	    if (langa != "en" && langb != null && langb != "en") { 
      	 		insert = this._mocktranslate(insert, langb)
      	 	    }
-     	             if (tlit == true) {
-     	 	        w = translit(w, false)
+     	    if (tlit == true) {
+		console.log("translit from gl")
+     	 	         w = translit(w, { translitLatin: false })
      	 	    }
      	 	    if (marksourceword) {
      	 		out += "<<" + w_orig + ">>"

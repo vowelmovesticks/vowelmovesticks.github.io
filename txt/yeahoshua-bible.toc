@@ -3,13 +3,13 @@ exodus	names
 leviticus	and called
 numbers	in the desert
 deuteronomy	words
-joshua	yeahoshua
+joshua	vowelmove-sticks
 judges	judges
 1_samuel	shmual a
 2_samuel	shmual b
 1_kings	kings a
 2_kings	kings b
-isaiah	yeshuayeaho
+isaiah	sticks-vowelmove
 jeremiah	yeremiyeaho
 ezekiel	yexhecqial
 hosea	hoshea
@@ -47,7 +47,7 @@ colossians	to the colossians
 1_thessalonians	to the thessalonians a
 2_thessalonians	to the thessalonians b
 1_timothy	to timothy
-2_timothy	to timothy
+2_timothy	to timothy b
 titus	to titus
 philemon	to philemon
 hebrews	to the hebrews
@@ -58,9 +58,9 @@ james	by yaqob
 2_john	by yeahoxhanan b
 3_john	by yeahoxhanan c
 jude	by yeahudas
-matthew	yeahoshua sink-swim-chat according to matityeaho
-mark	yeahoshua sink-swim-chat according to mark
-luke	yeahoshua sink-swim-chat according to luke
-acts	acts of the emissaries
-john	yeahoshua sink-swim-chat according to yeahoxhanan
-revelation	revelation of vowelmoment-sticks sink-swim-chat
+matthew	vowelmove-sticks x matityeaho
+mark	vowelmove-sticks x mark
+luke	vowelmove-sticks x luke
+acts	emissaries
+john	vowelmove-sticks x yeahoxhanan
+revelation	revelation of vowelmoment-sticks
