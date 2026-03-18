@@ -36,6 +36,10 @@ function translit(oldTextContent, args) {
 	return ""
     }
 
+    if (!args) {
+	args = {}
+    }
+
     var translitLatin = false
     if ("translitLatin" in args) {
 	translitLatin = args.translitLatin
