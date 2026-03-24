@@ -18,6 +18,7 @@ hebrew עברית	bible-he-yeahoshua	he
 hebrew arabic translit	bible-he-yeahoshua-tlit-ar	he
 hebrew latin translit	bible-he-yeahoshua-tlit	
 hebrew vowels translit	tnk-he-vowtlit
+hebrew tnk greek info	bib-orig	-
 hindi हिन्दी	bible-hi-yeahoshoo	hi
 hungarian magyar	bible-hu-yeahozsue	hu
 indonesian bahasa indonesia	yeaho-melekat-id	id

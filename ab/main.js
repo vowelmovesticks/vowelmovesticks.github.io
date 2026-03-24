@@ -124,11 +124,8 @@ async function initww() {
 }
 async function onwwcheck(what) {
   setparam("ww_" + what, wwcheck[what].checked)
-  
   var langcode = langcodes[sel[what].value]
-
-  // we need a dict
-  if (wwcheck[what].checked && !ww.hasdict(langcode)) {
+  if (langcode != "-" && wwcheck[what].checked && !ww.hasdict(langcode)) {
     var res = await fetch("../dicts/dict-" + langcode + ".json")
     var d = await res.json()
     ww.adddict(d)
@@ -308,42 +305,39 @@ function renderbook(booktag) {
   }
 }
 function insertwwtlit(lines) {
-  out = []
+  var out = []
   for (var line of lines) {
-    var outline = ""
     var f = line.split("\t")
+    var outline = ""
     if (!f[1].match(/^##/)) {
       outline = f[0]
-      for (var i = 1; i < f.length; i++) {
-        var s = f[i]
-        if (i == 1 && wwcheck["a"].checked) {
-	  s = quickfixends(s)
-	  outline += "\t" + ww.glhtml(s, langcodes[sel["a"].value], "en", tlitcheck["a"].checked)
-	}
-        else if (i == 2 && wwcheck["b"].checked) {
-	  s = quickfixends(s)
-	  // console.log(s)
-	  outline += "\t" + ww.glhtml(s, langcodes[sel["b"].value], "en", tlitcheck["b"].checked)
-	}
-        else {
-	  // console.log("tlit b: " + tlitcheck["b"].checked)
-	  // translit if set
-	  if (i == 1 && tlitcheck["a"].checked || i == 2 && tlitcheck["b"].checked) {
-	    //console.log("translit: " + translit(s))
-	    outline += "\t" + translit(s)
-	    
-	  } else { // else don't translit
-	    outline += "\t" + s
-	  }
-	}
-      }
+      outline += "\t" + wwtlit(quickfixends(f[1]), wwcheck["a"].checked, tlitcheck["a"].checked, langcodes[sel["a"].value])
+      outline += "\t" + wwtlit(quickfixends(f[2]), wwcheck["b"].checked, tlitcheck["b"].checked, langcodes[sel["b"].value])
     }
     else {
       outline = line
     }
+    //console.log("out:")
+    //console.log(out)
     out.push(outline)    
   }
   return out
+}
+function wwtlit(s, needww, needtlit, lang) {
+  if (needww) {
+    if (!s.match(/\[\[/)) {
+      //console.log("put ww: " + lang)
+      s = ww.glhtml(s, lang, "en", false)
+    } else {
+      s = stickylingo.gltohtml(s)
+    }
+  } else if (!needww && s.match(/\[\[/)) {
+    s = stickylingo.rmww(s)
+  }
+  if (needtlit) {
+    s = translit(s)
+  }
+  return s
 }
 function dir(lang) {
   if (["he", "ar", "fa"].includes(lang)) {

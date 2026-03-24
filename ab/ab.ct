@@ -35,6 +35,7 @@ main js holds the code.
 ``biblebookchap``
 ``renderbook``
 ``insertwwtlit``
+``wwtlit``
 ``dir``
 ``sethash``
 ``quickfixends``
@@ -290,18 +291,37 @@ onwwcheck loads dict if needed for checkbox and kicks of render.
 
 ``/onwwcheck:
 async function onwwcheck(what) {
-  setparam("ww_" + what, wwcheck[what].checked)
-  
-  var langcode = langcodes[sel[what].value]
+  ``.``
+}
+``
 
-  // we need a dict
-  if (wwcheck[what].checked && !ww.hasdict(langcode)) {
+set the url parameter.
+
+``
+  setparam("ww_" + what, wwcheck[what].checked)
+``
+
+get the langcode for the text.
+
+``
+  var langcode = langcodes[sel[what].value]
+``
+
+load the dict, if it wasn't loaded yet and if the langcode isn't "-"
+(as for the mixed-language hebrew/greek original text).
+
+``
+  if (langcode != "-" && wwcheck[what].checked && !ww.hasdict(langcode)) {
     var res = await fetch("../dicts/dict-" + langcode + ".json")
     var d = await res.json()
     ww.adddict(d)
   }
+``
+
+update the ui.
+
+``
   render()
-}
 ``
 
 # translit
@@ -642,7 +662,7 @@ function biblebookchap(lines, tocs) {
 
 renderbook renders the clicked book in toc.
 
-renderbook fuses in translit and word by word translations. is
+renderbook puts in translit and word by word translations. it is
 dependent upon that updatepaste pasted the texts and chopped them by
 book before.
 
@@ -689,80 +709,109 @@ it slices the lines open, puts in word by word where selected, and
 returns the lines with the word by word html.
 
 ``/insertwwtlit/loop:
-  out = []
+  var out = []
   for (var line of lines) {
-    var outline = ""
-    var f = line.split("\t")
-    ``normal``
-    ``format``
-    out.push(outline)    
+    ``.``
   }
 ``
 
-if it's a normal line insert translations and translit.
+split the line into verse-tag, lang a and lang b.
 
-``./normal:
+put together the ouput line.
+
+``
+    var f = line.split("\t")
+    var outline = ""
+``
+
+if it's a non-format line insert translations and translit for lang a and b.
+
+``
     if (!f[1].match(/^##/)) {
       outline = f[0]
-      for (var i = 1; i < f.length; i++) {
-        var s = f[i]
-	``field a``
-	``field b``
-	``tlit``
-      }
+      outline += "\t" + wwtlit(quickfixends(f[1]), wwcheck["a"].checked, tlitcheck["a"].checked, langcodes[sel["a"].value])
+      outline += "\t" + wwtlit(quickfixends(f[2]), wwcheck["b"].checked, tlitcheck["b"].checked, langcodes[sel["b"].value])
     }
-``
-
-insert word-by-word for field a.
-
-``./field a:
-        if (i == 1 && wwcheck["a"].checked) {
-	  s = quickfixends(s)
-	  outline += "\t" + ww.glhtml(s, langcodes[sel["a"].value], "en", tlitcheck["a"].checked)
-	}
-``
-
-insert word-by-word for field b.
-
-``../field b:
-        else if (i == 2 && wwcheck["b"].checked) {
-	  s = quickfixends(s)
-	  // console.log(s)
-	  outline += "\t" + ww.glhtml(s, langcodes[sel["b"].value], "en", tlitcheck["b"].checked)
-	}
-``
-
-somehow passing tlit to glhtml doesn't work at the moment, so translit
-now.
-
-append the translit line for field a or b, if only tlit is checked.
-
-``../tlit:
-        else {
-	  // console.log("tlit b: " + tlitcheck["b"].checked)
-	  // translit if set
-	  if (i == 1 && tlitcheck["a"].checked || i == 2 && tlitcheck["b"].checked) {
-	    //console.log("translit: " + translit(s))
-	    outline += "\t" + translit(s)
-	    
-	  } else { // else don't translit
-	    outline += "\t" + s
-	  }
-	}
 ``
 
 if it's a format line, just append it.
 
-``/insertwwtlit/loop/format:
+``
     else {
       outline = line
     }
+``
+
+append the line.
+
+``
+    //console.log("out:")
+    //console.log(out)
+    out.push(outline)    
 ``
 
 return.
 
 ``/insertwwtlit/ret:
   return out
+``
+
+wwtlit applies word to word and translit to a string depending on what
+is selected.  word to word may be removed if it already comes with the
+text and is deselected.
+
+``/wwtlit:
+function wwtlit(s, needww, needtlit, lang) {
+  ``.``
+}
+``
+
+if word by word selected and not in the text, insert it.  
+
+``
+  if (needww) {
+    if (!s.match(/\[\[/)) {
+      ``put ww``
+    } else {
+      ``fmt ww``
+    }
+  } else if (!needww && s.match(/\[\[/)) {
+    ``remove ww``
+  }
+  if (needtlit) {
+    ``tlit``
+  }
+``
+
+put in ww.
+
+``./put ww:
+    //console.log("put ww: " + lang)
+    s = ww.glhtml(s, lang, "en", false)
+``
+
+format existing ww.
+
+``../fmt ww:
+    s = stickylingo.gltohtml(s)
+``
+
+remove ww if it is 'hard-coded' into the text and was deselected.
+
+``../remove ww:
+    s = stickylingo.rmww(s)
+``
+
+put in tlit.
+
+``../tlit:
+    s = translit(s)
+``
+
+return.
+
+``../
+  return s
 ``
 
 tohtml returns html from bookchap text.

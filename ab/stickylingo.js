@@ -155,7 +155,7 @@ class stickylingo {
     var out = []
     var intranslate = false
     var gather = ""
-    a = stickylingo.split(s, "en")
+    var a = stickylingo.split(s, "en")
     //console.log("split: " + JSON.stringify(a))
     for (var i = 0; i < a.length; i++) {
       //console.log("a[i]: " + a[i])
@@ -206,6 +206,16 @@ class stickylingo {
         out += "[[" + wst[i].txt + "]]"
       } else {
         out += wst[i].txt
+      }
+    }
+    return out
+  }
+  static rmww(s) {
+    var wst = stickylingo.towst(s)
+    out = ""
+    for (var e of wst) {
+      if (e.type != "t") {
+        out += e.txt
       }
     }
     return out
