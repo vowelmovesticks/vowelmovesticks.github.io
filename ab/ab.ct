@@ -423,7 +423,7 @@ function updatepaste() {
   var books = ["genesis","exodus","leviticus","numbers","deuteronomy","joshua","judges","1_samuel","2_samuel","1_kings","2_kings","isaiah","jeremiah","ezekiel","hosea","joel","amos","obadiah","jonah","micah","nahum","habakkuk","zephaniah","haggai","zechariah","malachi","psalms","proverbs","job","songs","ruth","lamentations","ecclesiastes","esther","daniel","ezra","nehemiah","1_chronicles","2_chronicles","romans","1_corinthians","2_corinthians","galatians","ephesians","philippians","colossians","1_thessalonians","2_thessalonians","1_timothy","2_timothy","titus","philemon","hebrews","james","1_peter","2_peter","1_john","2_john","3_john","jude","matthew","mark","luke","acts","john","revelation"]
   
   pasted = kpaste(text["a"], text["b"], books)
-  
+
   console.log("after kpaste")  
 }
 ``
